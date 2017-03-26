@@ -17,22 +17,35 @@ Using a single camera input, ConvNets autonomously drive a vehicle, by controlli
 ---
 
 ### Running simulation:
-1 - Fire up the simulator
+1 - Fire up the simulator in `Autonomous` mode.
 
-Two control configurations were developed
+Two control configurations options are available:
 
-2a) Opt1: Lateral Control (NN controls steering angle only + steering modulated constant set speed)
+2a) Opt1: `Lateral Control` (NN controls steering angle only + steering modulated constant set speed)
 
 From the command line:
 
 `python drive.py model/model_angle.h5`
 
 
-2b) Opt 2: Lateral and Longitudinal Control (NN steering angle + NN set speed)
+2b) Opt 2: `Lateral and Longitudinal Control` (NN steering angle + NN set speed)
 
 From the command line:
 
 `python drive_LLCtrl.py model/model_angle.h5 model/model_velocity.h5`
+
+*Note: This project was developed with Python 3.5*
+
+---
+
+### Simulation videos
+Simulation videos are those of the center camera used for controlling the vehicle. They are located in the following:
+
+* Lateral control (Easy Track): "simu_vids_lat_ctrl/BothTrack_Trained/EasyTrack/simu_images.mp4"
+* Lateral control (Hard Track): "simu_vids_lat_ctrl/BothTrack_Trained/HardTrack/simu_images.mp4"
+* Lateral & Longitudinal control (Easy Track): "simu_vids_lat_long_ctrl/Easy_Track/simu_drive_cam.mp4"
+* Lateral & Longitudinal control (Hard Track): "simu_vids_lat_long_ctrl/Hard_Track/simu_drive_cam.mp4"
+
 
 ---
 
@@ -153,10 +166,3 @@ Images were cropped 50 pixels from the top, and 20 pixels from the bottom, to re
 * Fully connected layer (1) which is the measure output (logit).
 
 ---
-
-### Simulation videos
-
-* Lateral control (Easy Track): "simu_vids_lat_ctrl/BothTrack_Trained/EasyTrack/simu_images.mp4"
-* Lateral control (Hard Track): "simu_vids_lat_ctrl/BothTrack_Trained/HardTrack/simu_images.mp4"
-* Lateral & Longitudinal control (Easy Track): "simu_vids_lat_long_ctrl/Easy_Track/simu_drive_cam.mp4"
-* Lateral & Longitudinal control (Hard Track): "simu_vids_lat_long_ctrl/Hard_Track/simu_drive_cam.mp4"
