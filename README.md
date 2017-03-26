@@ -177,7 +177,7 @@ Images were cropped 50 pixels from the top, and 20 pixels from the bottom, to re
 
 *Lane switching* - in the hard track, at one point, the vehicle switches lanes. Knowledge to recover from this event needs to also be introduced in the data.
 
-*Sharp turns* - In the video I have captured a failure of the vehicle in the hard track, at a sharp turn, due to the high speed requested. This was under the Long & Lat configuration scheme. This points out to the need for more data under this scenario.
+*Sharp turns* - In the video I have captured a failure of the vehicle in the hard track, at a sharp turn, due to the high speed requested from the longitudinal controller, when running under the Long & Lat configuration scheme. This points out to the need for more data under this scenario. This failure point is avoided when running only on the Lat controlling scheme.
 
 *Additional signals* - need to explore using accelerometer signals. I expect that physical combined with visual awareness would make a more robust system
 
