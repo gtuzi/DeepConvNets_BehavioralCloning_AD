@@ -179,5 +179,5 @@ Images were cropped 50 pixels from the top, and 20 pixels from the bottom, to re
 
 *Sharp turns* - In the video I have captured a failure of the vehicle in the hard track, at a sharp turn, due to the high speed requested. This was under the Long & Lat configuration scheme. This points out to the need for more data under this scenario.
 
-
+*Additional signals* - need to explore using accelerometer signals. I expect that physical combined with visual awareness would make a more robust system
 
