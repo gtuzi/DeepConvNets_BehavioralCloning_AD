@@ -168,3 +168,16 @@ Images were cropped 50 pixels from the top, and 20 pixels from the bottom, to re
 * Fully connected layer (1) which is the measure output (logit).
 
 ---
+
+### Observations & Comments
+
+*Center seeking* - especially in straight segments of the road the vehicle displays center (of lane) seeking behavior. This is due to the correction introduced by the left and right cameras labels. This behavior becomes unstable at high speeds. Correction used needs to be better tuned. 
+
+*Longitudinal speed fluctuations* - it was hard (for me) to generate stable speed driving in turns especially in the hard track. Here the net learns from the human's driving. This in turn, is reflected in the longitudinal controller where more-than-desired speed request fluctuations. A better driving interface should address this issue.
+
+*Lane switching* - in the hard track, at one point, the vehicle switches lanes. Knowledge to recover from this event needs to also be introduced in the data.
+
+*Sharp turns* - In the video I have captured a failure of the vehicle in the hard track, at a sharp turn, due to the high speed requested. This was under the Long & Lat configuration scheme. This points out to the need for more data under this scenario.
+
+
+
