@@ -46,7 +46,7 @@ Simulation videos are those of the center camera used for controlling the vehicl
 * Lateral & Longitudinal control (Easy Track): "simu_vids_lat_long_ctrl/Easy_Track/simu_drive_cam.mp4"
 * Lateral & Longitudinal control (Hard Track): "simu_vids_lat_long_ctrl/Hard_Track/simu_drive_cam.mp4"
 
-As of this writing, Github will not play the embedded videos on the webpage, due to large size. Videos need to be downloaded separately.
+Videos play at 2x the speed of the actual simulation so that the extent of the lap covered is viewed faster. This however, ends up augmenting *perceived* center seeking behavior of the vehicle, which still needs to be addressed. Moreover, as of this writing, Github will not play the embedded videos on the webpage, due to large size. They need to be downloaded separately.
 
 
 ---
