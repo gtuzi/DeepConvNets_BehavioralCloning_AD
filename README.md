@@ -1,10 +1,84 @@
 ### Behavioral cloning for autonomous driving using deep ConvNets
-ConvNets autonomously drive a vehicle, by controlling steering and velocity.
+Using a single camera input, ConvNets autonomously drive a vehicle, by controlling steering and velocity.
+
+#### Noteworthy files:
+* Project report: more details are found in `Behavioral Cloning - Project Report.ipynb`
+* Training harness: `BasicRegressionModelTraining.ipynb` trains both NNs used in this project
 
 ### Process:
 * Collect continuous driving data
 * Using Keras design and implement ConvNet  to control driving simulation
 * Evaluate performance
+
+---
+### Driving environment
+
+Two tracks were presented. 
+* Easy: flat surface, wide lanes, longer straight streteches, fewer sharp turns, more wide turns
+
+![EasyTrack](images/easy_track.png)
+
+
+* Hard: mountainous, narrow lanes, few straight stretches, many sharp turns
+
+![HardTrack](images/hard_track.png)
+
+
+---
+
+### Data description
+For steering angle, normal driving generates a very imbalanced set, with the data being dominated by the 0-angle steering (straight driving). For example:
+
+![AngleDistro](images/Hard_track_angle_distro.png)
+
+
+For the speed, the two tracks differ significantly. The speed profile reflects both restrictions of the road (turns, etc) and also human driver's driving preferences.
+
+For the easy track, I drove at maximum speed (30 mph) most of the time:
+
+![EasyTrackVelocityDistro](images/Easy_track_velocity_distro.png)
+
+
+However, for the hard track, driving pattern was much more careful:
+
+![HardTrackVelocityDistro](images/Hard_track_velocity_distro.png)
+
+
+---
+
+### Data imbalance, agumentations, and knowledge injection
+
+#### Emulate lane drifts and correct (augmentation, knowledge injection)
+Augment the set using the feed from left / right mounted cameras. Introduce *artificial* corrective steering angle.
+Two corrective actions were used: 
+
+(i) steering angle correction of `+/- 0.2` from the current shift (from a left cam shift, `+0.2`, for right cam shift, `-0.2`, where (`+`) sign is counter-clockwise direction). 
+
+![MultiCam](images/multiple-cameras.png)
+
+(ii) `5mph`  speed slow down, with the assumption, that if a lane drift has been encountered, we would want the vehicle to slow down. 
+
+
+#### Horizontal random shifts (augmentation, knowledge injection)
+During training, random horizontal shifts are applied to imag as a portion `0 < p < 1` of its width, where the applied `p~ = [-p, p]`
+Same portion is applied to the steering angular shift as: 
+
+`new angle = actual angle + (p~) x actual angle`
+
+#### Capture more under-represented samples (data collection)
+Concentrate on capturing more data for scenarios which are not encountered during driving.
+
+#### Drive in the oposite direction
+Reduces the bias of driving in a particular direction (increases variance in data, helps the NN generalize better)
+
+#### Image LR flip
+Introduce opposite driving by flipping the image and switching the sign of the angle of steering. This doesn't effect speed labels.
+
+#### Balance scenario specific representation
+Maintain an "equally" represented number of samples for corner-driving and center-driving (as much as possible)
+
+#### Leverage bias-variance tradeoff
+Favor variance in the bias-variance tradeoff. No Lx-regularization was implemented, very low dropout (0.2) for a relatively large NN. Overfitting (i.e. high variance) was minimized with early termination. Note, that without *any* dropout, validation performance suffered.
 
 ---
 
@@ -25,10 +99,16 @@ Two deep networks control steering and vehicle set speed, respectively.
 The speed output of the longitudinal network is clipped in the range `[5mph, 20 mph]`. A speed below `5mph` would stall the vehicle in the simulator. A speed above `20mph` causes severe center-seeking driving behavior in straight segments.
 
 Implementation: ```drive_LLCtrl.py```, lines *66-72*
+
 ---
 
 ### Network architecture
 Codenamed GTRegression
+
+#### Image pre-processing
+
+Images were cropped 50 pixels from the top, and 20 pixels from the bottom, to remove information that doesn't carry any road information (and also speeds up processing). Moreover, images were mean normalized before being fed into the net.
+
 
 ![GTRegression](images/GTRegression.png)
 
@@ -43,5 +123,9 @@ Codenamed GTRegression
 
 ---
 
+### Simulation videos
 
-
+* Lateral control (Easy Track): "simu_vids_lat_ctrl/BothTrack_Trained/EasyTrack/simu_images.mp4"
+* Lateral control (Hard Track): "simu_vids_lat_ctrl/BothTrack_Trained/HardTrack/simu_images.mp4"
+* Lateral & Longitudinal control (Easy Track): "simu_vids_lat_long_ctrl/Easy_Track/simu_drive_cam.mp4"
+* Lateral & Longitudinal control (Hard Track): "simu_vids_lat_long_ctrl/Hard_Track/simu_drive_cam.mp4"
