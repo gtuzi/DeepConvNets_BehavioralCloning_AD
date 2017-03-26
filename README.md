@@ -3,6 +3,7 @@ Using a single camera input, ConvNets autonomously drive a vehicle, by controlli
 
 #### Noteworthy files:
 * Project report: more details are found in `Behavioral Cloning - Project Report.ipynb`
+* Behavioral+Cloning+-+Project+Report.html : html version of report (embedded videos). As of this writing, this file doesn't display on github's page.
 * Training harness: `BasicRegressionModelTraining.ipynb` trains both NNs used in this project
 * `drive.py` implements lateral NN controller
 * `drive_LLCtrl.py` implements lateral & longitudinal controllers
