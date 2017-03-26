@@ -34,7 +34,7 @@ From the command line:
 
 `python drive_LLCtrl.py model/model_angle.h5 model/model_velocity.h5`
 
-*Note: This project was developed with Python 3.5*
+*Note: This project was developed with Python 3.5 using Keras 2.0.1 and TensorFlow 0.12*
 
 ---
 
