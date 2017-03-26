@@ -4,6 +4,36 @@ Using a single camera input, ConvNets autonomously drive a vehicle, by controlli
 #### Noteworthy files:
 * Project report: more details are found in `Behavioral Cloning - Project Report.ipynb`
 * Training harness: `BasicRegressionModelTraining.ipynb` trains both NNs used in this project
+* `drive.py` implements lateral NN controller
+* `drive_LLCtrl.py` implements lateral & longitudinal controllers
+
+#### Simulator links
+
+* [Linux](https://d17h27t6h515a5.cloudfront.net/topher/2017/February/58ae46bb_linux-sim/linux-sim.zip)
+* [Windows](https://d17h27t6h515a5.cloudfront.net/topher/2017/February/58ae4419_windows-sim/windows-sim.zip)
+* [MacOS](https://d17h27t6h515a5.cloudfront.net/topher/2017/February/58ae4594_mac-sim.app/mac-sim.app.zip)
+
+---
+
+### Running simulation:
+1 - Fire up the simulator
+
+Two control configurations were developed
+
+2a) Opt1: Lateral Control (NN controls steering angle only + steering modulated constant set speed)
+
+From the command line:
+
+`python drive.py model/model_angle.h5`
+
+
+2b) Opt 2: Lateral and Longitudinal Control (NN steering angle + NN set speed)
+
+From the command line:
+
+`python drive_LLCtrl.py model/model_angle.h5 model/model_velocity.h5`
+
+---
 
 ### Process:
 * Collect continuous driving data
