@@ -21,14 +21,14 @@ Using a single camera input, ConvNets autonomously drive a vehicle, by controlli
 
 Two control configurations options are available:
 
-2a) - `Lateral Control` (NN controls steering angle only + steering modulated constant set speed)
+2a) - *Lateral Control* where NN controls steering angle. Target constant speed is modulated by amount of steering angle.
 
 From the command line:
 
 `python drive.py model/model_angle.h5`
 
 
-2b) - `Lateral and Longitudinal Control` (NN steering angle + NN set speed)
+2b) - *Lateral and Longitudinal Control* where 2 neural networks control steering angle and target speed.
 
 From the command line:
 
